@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Title</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+  <style>
+    * {
+      margin: 0;
+    }
+  </style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+  <!-- list-customer--------------------------------------------- -->
+  <div class="d-flex justify-content-between align-items-center ml-3 mr-3 mt-3 mb-2 h-75 bg-success">
+    <div class="m-2">
+      <h1 class="text-white">List of customer</h1>
+    </div>
+    <div class="m-2">
+      <a class="btn btn-outline-primary text-white" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal"
+        role="button"><i class="fas fa-user-plus"></i> New create customer</a>
+      <a class="btn btn-outline-primary text-white"><i class="fas fa-history"></i> Transaction history</a>
+    </div>
+  </div>
+  <div>
+    <h3 id="result"></h3>
+  </div>
+  <div class="content col-12">
+    <table class="table table-striped" id="listCustomer">
+      <thead>
+        <tr class="text-center bg-primary font-weight-bold">
+          <td>ID</td>
+          <td>Full name</td>
+          <td>Email</td>
+          <td>Address</td>
+          <td>Phone</td>
+          <td>Balance</td>
+          <td colspan="5">Action</td>
+        </tr>
+      </thead>
+      <tbody class="list-customer"></tbody>
+    </table>
+  </div>
+
+  <!-- create customer ----------------------- -->
+  <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
+    tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalToggleLabel2">
+            New create customer
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="container justify-center col-10">
+            <form method="post">
+              <table class="table table-striped">
+                <tr>
+                  <td>Name</td>
+                  <td>
+                    <input type="text" name="name" class="form-control" id="fullnameCre" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>Email</td>
+                  <td>
+                    <input type="text" name="email" class="form-control" id="emailCre" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>Address</td>
+                  <td>
+                    <input type="text" name="address" class="form-control" id="addressCre" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>Phone</td>
+                  <td>
+                    <input type="text" name="phone" class="form-control" id="phoneCre" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>Balance</td>
+                  <td>
+                    <input type="text" name="phone" class="form-control" id="balanceCre" />
+                  </td>
+                </tr>
+              </table>
+            </form>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal"
+            data-bs-dismiss="modal" id="btnCreate">
+            Create customer
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- edit customer ----------------------------------->
+  <div class="modal fade" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1" id="modalUpdate">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalToggleLabel2">
+            Edit customer
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="container justify-center col-10">
+            <form method="post">
+              <table class="table table-striped">
+                <tr>
+                  <td>Name</td>
+                  <td>
+                    <input type="text" name="name" class="form-control" id="fullnameUp" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>Email</td>
+                  <td>
+                    <input type="text" name="email" class="form-control" id="emailUp" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>Address</td>
+                  <td>
+                    <input type="text" name="address" class="form-control" id="addressUp" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>Phone</td>
+                  <td>
+                    <input type="text" name="phone" class="form-control" id="phoneUp" />
+                  </td>
+                </tr>
+              </table>
+            </form>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal"
+            data-bs-dismiss="modal" id="btnEdit">
+            Edit customer
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- delete customer ------------------------------------------ -->
+  <div class="modal fade" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalToggleLabel2">
+            Delete customer
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="container justify-center col-10">
+            <form method="post">
+              <table class="table table-striped">
+                <tr>
+                  <td>Name</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>Email</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>Address</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>Phone</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>
+                    <button type="submit" class="btn-outline-danger">
+                      Delete customer
+                    </button>
+                  </td>
+                </tr>
+              </table>
+            </form>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal"
+            data-bs-dismiss="modal">
+            Back to first
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- deposit-------------------------------------------------------- -->
+  <div class="modal fade" id="modalDeposit" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalToggleLabel2">Deposit</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="container justify-center col-10">
+            <form th:object="${customer}" method="post">
+              <table class="table table-striped">
+                <tr>
+                  <td>Name</td>
+                  <td>
+                    <input type="text" type="text" name="name" class="form-control" id="fullnameDep" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>Email</td>
+                  <td>
+                    <input type="text" type="text" name="email" class="form-control" id="emailDep" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>Address</td>
+                  <td>
+                    <input type="text" type="text" name="address" class="form-control" id="addressDep" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>Phone</td>
+                  <td>
+                    <input type="text" type="text" name="phone" class="form-control" id="phoneDep" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>Balance (VND)</td>
+                  <td>
+                    <input type="text" type="text" name="balance" class="form-control" id="balanceDep" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>Transaction amount</td>
+                  <td>
+                    <input type="text" type="text" name="transactionAmount" class="form-control"
+                      id="transactionAmountDep" />
+                  </td>
+                </tr>
+              </table>
+            </form>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal"
+            data-bs-dismiss="modal" id="btnDeposit">
+            Deposit
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- transfer-------------------------------------------------------- -->
+  <div class="modal fade" id="modalTransfer" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
+    tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalToggleLabel2">Transfer</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="container justify-center col-10">
+            <form th:object="${sender}" method="post">
+              <table class="table table-striped">
+                <tr>
+                  <td>ID Sender</td>
+                  <td>
+                    <input type="text" type="text" name="idsender" class="form-control" id="idsender" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>Sender</td>
+                  <td>
+                    <input type="text" type="text" name="namesender" class="form-control" id="namesender" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>Email</td>
+                  <td>
+                    <input type="text" type="text" name="email" class="form-control" id="email" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>Address</td>
+                  <td>
+                    <input type="text" type="text" name="address" class="form-control" id="address" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>Phone</td>
+                  <td>
+                    <input type="text" type="text" name="phone" class="form-control" id="phone" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>Balance (VND)</td>
+                  <td>
+                    <input type="text" type="text" name="balance" class="form-control" id="balance" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>Recipient</td>
+                  <td>
+                    <select id="idRecipient"></select>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Transfer amount</td>
+                  <td>
+                    <input type="text" class="form-control" id="transfer" oninput="calculateTotal()" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>Fees (%)</td>
+                  <td>10</td>
+                </tr>
+                <tr>
+                  <td>Transaction amount (VND)</td>
+                  <td>
+                    <input type="text" id="transactionAmount" class="form-control" />
+                  </td>
+                </tr>
+              </table>
+            </form>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-success" data-bs-target="#exampleModalToggle" data-bs-toggle="modal"
+            data-bs-dismiss="modal" id="btnTransfer">
+            Transfer
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- withdraw-------------------------------------------------------------->
+  <div class="modal fade" id="modalWithdraw" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
+    tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalToggleLabel2">Withdraw</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="container justify-center col-10">
+            <form th:object="${customer}" method="post">
+              <table class="table table-striped">
+                <tr>
+                  <td>Name</td>
+                  <td>
+                    <input type="text" type="text" name="name" class="form-control" id="fullnameWit" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>Email</td>
+                  <td>
+                    <input type="text" type="text" name="email" class="form-control" id="emailWit" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>Address</td>
+                  <td>
+                    <input type="text" type="text" name="address" class="form-control" id="addressWit" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>Phone</td>
+                  <td>
+                    <input type="text" type="text" name="phone" class="form-control" id="phoneWit" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>Balance (VND)</td>
+                  <td>
+                    <input type="text" type="text" name="balance" class="form-control" id="balanceWit" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>Withdraw amount</td>
+                  <td>
+                    <input type="text" type="text" name="withdraw" class="form-control" id="withdrawWit" />
+                  </td>
+                </tr>
+              </table>
+            </form>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-warning" data-bs-target="#exampleModalToggle" data-bs-toggle="modal"
+            data-bs-dismiss="modal" id="btnWithdraw">
+            Withdarw
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="main.js"></script>
+</body>
+
+</html>
